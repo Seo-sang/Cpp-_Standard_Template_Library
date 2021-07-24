@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
-#include <algorithm>
 
 using namespace std;
 
@@ -132,10 +131,3 @@ public:
         return myiterator(tail);
     }
 };
-
-int main() {
-    myvector<int> v;
-    for(int i = 0; i < 10; i++) {
-        v.push_back(i);
-    }
-}
