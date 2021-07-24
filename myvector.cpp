@@ -37,6 +37,10 @@ public:
         bool operator !=(const myiterator& cmp) {
             return (current != cmp.current);
         }
+
+        bool operator ==(const myiterator& cmp) {
+            return (current == cmp.current);
+        }
     };
 
     myvector() {
@@ -131,3 +135,20 @@ public:
         return myiterator(tail);
     }
 };
+
+int main() {
+    myvector<int> v;
+    for(int i = 0; i < 15; i++)
+        v.push_back(i);
+    
+    for(int i = 0; i < v.size(); i++)
+        cout << v.arr[i] <<' ';
+        
+    cout << endl;
+    for(int i = 0; i < 8; i++)
+        v.pop_back();
+
+    for(int i = 0; i < v.size(); i++)
+        cout << v.arr[i] << ' ';
+    cout << endl;
+}
