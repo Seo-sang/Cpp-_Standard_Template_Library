@@ -73,14 +73,34 @@ public:
         }
         num--;
     }
+
+    void swap(myqueue<T> &with) {
+        myqueue<T> tmp = *this;
+        *this = with;
+        with = tmp;
+    }
 };
 
 int main() {
-    myqueue<int> q;
-    for(int i = 1; i <= 10; i++) {
-        q.push(i);
+    myqueue<int> q1, q2;
+    for(int i = 1; i <= 10; i++) 
+        q1.push(i);
+    
+    for(int i = 101; i <= 110; i++)
+        q2.push(i);
+
+    q1.swap(q2);
+
+    while(!q1.empty()) {
+        cout << q1.front() << ' ';
+        q1.pop();
     }
-    while(!q.empty()) {
-        cout << q.front() << endl; q.pop();
+    
+    cout << endl;
+
+    while(!q2.empty()) {
+        cout << q2.front() << ' ';
+        q2.pop();
     }
+    
 }
