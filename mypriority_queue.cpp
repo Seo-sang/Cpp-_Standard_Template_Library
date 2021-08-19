@@ -1,0 +1,86 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+template <class T, class CONT = std::vector<T>, class CMP = less<typename CONT::value_type>>
+class mypriority_queue {
+private:
+    CONT container;
+    int num;
+    CMP compare;
+public:
+    mypriority_queue() {
+        num = 0;
+        container.push_back(0);
+    }
+
+    bool empty() {
+        if(num) return false;
+        else return true;
+    }
+
+    int size() {
+        return num;
+    }
+
+    T top() {
+        return container[1];
+    }
+
+    void push(T input) {
+        num++;
+        container.push_back(input);
+        int now = num;
+        while(now > 1) {
+            if(compare(input, container[now/2])) {
+                container[now] = container[now/2];
+                now /= 2;
+            }
+            else {
+                break;
+            }
+        }
+        container[now] = input;
+    }
+
+    void pop() {
+        if(!num) return;
+        int pivot = container[num];
+        container.pop_back();
+        num--;
+        int now = 2;
+        while(now <= num) {
+            if(now + 1 <= num) {    
+                if(compare(container[now + 1], container[now])) {
+                    now++;
+                }
+            }
+            if(compare(container[now], pivot)) {
+                container[now/2] = container[now];
+                now *= 2;
+            }
+            else {
+                break;
+            }
+        }
+        container[now/2] = pivot;
+    }
+};
+
+int main() {
+    mypriority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(5);
+    pq.push(6);
+    pq.push(3);
+    pq.push(436);
+    pq.push(7878);
+    pq.push(45423);
+    pq.push(56);
+
+
+    while(!pq.empty()) {
+        cout << "pop : " << pq.top() <<'\n'; pq.pop();
+    }
+
+    return 0;
+}
