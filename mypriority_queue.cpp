@@ -32,7 +32,7 @@ public:
         container.push_back(input);
         int now = num;
         while(now > 1) {
-            if(compare(input, container[now/2])) {
+            if(compare(container[now/2], input)) {
                 container[now] = container[now/2];
                 now /= 2;
             }
@@ -51,11 +51,11 @@ public:
         int now = 2;
         while(now <= num) {
             if(now + 1 <= num) {    
-                if(compare(container[now + 1], container[now])) {
+                if(compare(container[now], container[now + 1])) {
                     now++;
                 }
             }
-            if(compare(container[now], pivot)) {
+            if(compare(pivot, container[now])) {
                 container[now/2] = container[now];
                 now *= 2;
             }
